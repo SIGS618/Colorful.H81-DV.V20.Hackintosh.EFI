@@ -1,0 +1,91 @@
+AMI ROM Tool - AFUWINGUI
+
+Description :
+	AMI Firmware Update utility(APTIO) for Windows GUI.
+
+Release Date :
+
+
+Source Control Location :
+	SS: Alaska;$/Alaska/ROMUtils/AFU/afuwin/64;
+
+Reference Document :	
+	readme.txt
+	readme_afuwin.txt
+	AMI_Aptio_AFU_User_Guide_NDA.pdf
+
+Known Issues :
+    Use "/Rn" parameter will have no effect or caused an exception error when the 
+    SMBIOS module version is "4.6.1_ALPHA_01.26.2_DMIRW_TEST" or later.
+
+Release Notes:
+==============================================================================
+1.13
+	01.Error message while flashing BIOS using AMIUCP to execute AFUWIN V2.35[51370]
+	02.Use AMIUCP1.06 to set command status to be ShownOnly and flash bios,then donn't restart OS,the 
+	   ShownOnly command status can be check again.
+	03.Reset retry count.
+==============================================================================
+1.12
+	01.Supports AMIUCP new commands status setting. [EIP 40002]
+	02.Remove AFU its EC error message, when BIOS has reported the EC error message for AFU. [EIP 45928]
+	03.Fixed the exception error when FV block size is less 64KB. [EIP 48906]
+	04.Adjust the ME block info check rule.
+==============================================================================
+1.11
+	01.AFUWINGUI show the wrong OS version info problem. EIP[44055]
+==============================================================================
+1.10
+	01.Modified the /CMD: command to sync with OEMCMD command's behavior. [EIP 43015]
+	02.Modified NVRAM data preserve function of OFBD invoke sequence to avoid caused BIOS flash failed, 
+	   when issued /R command and BIOS supports this feature. [EIP 41769]
+==============================================================================
+1.09
+	01.Add a new command line "/CAF" supports Main BIOS, Boot Block, Share EC and NCB data comparison.[EIP 35966]
+	02.Supports Intel AT 2.0 specification. [EIP 40463]
+	03.Add a new command line "/CMD:" to support the OEMCMD module¡¯s new status. [EIP 40787]
+	04.Fixed the flash hang up issue of AFU, when BIOS has share EC firmware and its SMIFlash module version is 4.6.3.6_SMIFLASH_13 or later 	   	   version. (Swap the GetFlashInfo and InitFlashIfc invoke sequence.)
+	05.Add Driver extract support.
+	06.Afuwingui will hang when OFBD rom ID check mismatch.
+==============================================================================
+1.08
+	01. Add a new command line "/OEMCMD:" to support the OEMCMD of OFBD module.[35966]
+	02. Change the /ECX command usage from xxx.rom /ECX to /ECX:xxx.rom and remove the auto shutdown action.
+	03. Add the Erase/Verify/Retry procedure during the EC firmware updating.[36765]
+	04. Changed the memory allocate method to avoid memory allocate failure, when use it under Compal's PXE Network booting DOS environment.
+	05. Fixed the "FFS checksums" is bad problem, when booting with HIMEM.SYS installed.
+	06. Change /R command reserve DMI data procedure, if DMI is stored in FV_MAIN or FV_BB or NVRAM.[37169]
+	07. Add new feature to support set/cancel commands by OFBD.[37411]
+	08. Support shutdown action, when use AMIUCP to set /SHUTDOWN command as default command in auto reflash mode.
+	09. Add a hidden command "/LR" to disable the first message box of AFUWINGUI for customer Long Run Test.
+==============================================================================
+1.07
+	1.Disable the hot key "Windows + L".
+	2.Fix a bug:when the rom file checksum has error,afuwingui continue to flash bios.
+==============================================================================
+1.06	
+	1.Add the feature of validating Rom File Checksum.[EIP24381]
+	2.Fix a issue that NCB type must be >= 0x80 instead of 80.
+	3.Support to update non EC-share BIOS when it isn't AMI EC Firmware.[EIP31739] 
+	4.Add support to flash /ME & /MEUF.[EIP31739]
+	5.Add support to use AMIUCP to only include rom image or only include command.
+	6.Fix the bug:afuwingui cann't execute after included by AMIUCP under WinPE.
+	7.Add Flash chip infomation support.
+==============================================================================
+1.04
+	1. Fix the issue that AFU stops flashing when it cannot find ROM ID in system ROM.
+==============================================================================
+1.03
+	1.ROMID and Password check by AFU before flashing BIOS.[EIP14374][EIP19375] 
+	2.AFU keep BIOS last setting after flashing BIOS.[EIP19257] 
+	3.Do NVRAM flashing after main BIOS being programmed.[EIP19890]
+	4.AFU support "$ECB" table in E000.[EIP19891] 
+	5.AFU Support Standalong EC firmware Flash.[EIP12739]
+	6.AFU support add rom file name by AMIUCP @CMD. 
+==============================================================================
+1.02
+	1.Bug Fix:Afu cann¡¯t transfer enough buffer to BLOCK DESCRIPTION. [EIP 18348] 
+==============================================================================
+1.01
+	1.EIP 12473:Afuwin-gui is required which interface is similar to afuwin core8,then add support to amiucp.
+

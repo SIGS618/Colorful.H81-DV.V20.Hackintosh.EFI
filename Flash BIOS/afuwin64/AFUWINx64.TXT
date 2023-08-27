@@ -1,0 +1,105 @@
+AMI ROM Tool - AFUWIN
+
+Description :
+	AMI Firmware Update utility(APTIO) for pure 64bits WINDOWS.
+
+Release Date :
+
+
+Source Control Location :
+	SS: Alaska;$/Alaska/ROMUtils/AFU/afuwin/64;
+
+Reference Document :	
+	readme.txt
+	readme_afuwin.txt
+	AMI_Aptio_AFU_User_Guide_NDA.pdf
+
+Known Issues :
+    Use "/Rn" parameter will have no effect or caused an exception error when the 
+    SMBIOS module version is "4.6.1_ALPHA_01.26.2_DMIRW_TEST" or later.
+
+Release Notes:
+==============================================================================
+2.36
+	01.Fixed the issue that AFU will output error message and skip OA3.0 key update if set 'DEBUG_MODE' token enabled.[EIP 50825][EIP 50911]
+	02.Fixed the issue that System hangs up when AFU flashing BIOS with "/B" command after disabling it in BIOS.[EIP 51229]
+	03.Implement clear event log function into Aptio AFU utilities.[EIP 51076]
+	04.Reset retry count.
+==============================================================================
+2.35
+	01.Supports AMIUCP new commands status setting. [EIP 40002]
+	02.Add a new hidden command parameter "/SANTA". [EIP 42965]
+	03.Remove AFU its EC error message, when BIOS has reported the EC error message for AFU. [EIP 45928]
+	04.Fixed the exception error when FV block size is less 64KB. [EIP 48906]
+	05.Add a new command parameter "/A" according to OA 3.0 spec to support OEM Activation Key update.[49084]
+	06.Adjust the ME block info check rule.
+==============================================================================
+2.34
+	01.Modified the /CMD: command to sync with OEMCMD command's behavior. [EIP 43015]
+	02.Modified NVRAM data preserve function of OFBD invoke sequence to avoid caused BIOS flash failed, 
+	   when issued /R command and BIOS supports this feature. [EIP 41769]
+==============================================================================
+2.33
+	01.Add a new command line "/CAF" supports Main BIOS, Boot Block, Share EC and NCB data comparison.[EIP 35966]
+	02.Supports Intel AT 2.0 specification. [EIP 40463]
+	03.Add a new command line "/CMD:" to support the OEMCMD module¡¯s new status. [EIP 40787]
+	04.Fixed the flash hang up issue of AFU, when BIOS has share EC firmware and its SMIFlash module version is 4.6.3.6_SMIFLASH_13 or later 	   	   version. (Swap the GetFlashInfo and InitFlashIfc invoke sequence.)
+	05.Add a new command line "/HOLEOUT:" supports specific ROM Hole data dump according to given GUID.[EIP 39508]
+	06.Add Driver extract support.
+==============================================================================
+2.32
+	01. Add a new command line "/OEMCMD:" to support the OEMCMD of OFBD module.[35966]
+	02. Change the /ECX command usage from xxx.rom /ECX to /ECX:xxx.rom and remove the auto shutdown action.
+	03. Add the Erase/Verify/Retry procedure during the EC firmware updating.[36765]
+	04. Changed the memory allocate method to avoid memory allocate failure, when use it under Compal's PXE Network booting DOS environment.
+	05. Fixed the "FFS checksums" is bad problem, when booting with HIMEM.SYS installed.
+	06. Change /R command reserve DMI data procedure, if DMI is stored in FV_MAIN or FV_BB or NVRAM.[37169]
+	07. Add new feature to support set/cancel commands by OFBD.[37411]
+	08. Change the shutdown/reboot method and display the warning message before windows start to shutdown/reboot the system.[37497]
+==============================================================================
+2.31
+	1.Support to show RomHole OEM message.
+	2.Support to flash NCB with NCB bin file.
+	3.Support to flash share EC with EC bin file.
+	4.Disable the hot key "Windows + L".
+==============================================================================
+2.30	
+	1.Add the feature of validating Rom File Checksum.[EIP24381]
+	2.Fix a issue that NCB type must be >= 0x80 instead of 80.
+	3.Bug Fix:Cann't flash ME correctly. 
+	4.Bug Fix:Cann't run normally under Windows 7 x64 after add rom file and default 
+	  command by AMIUCP.  
+	5.Afuwinx64 can't run under WinPE 2.0/3.0 64bits,so update the driver amifldrv64.sys. 
+	6.Support to update non EC-share BIOS when it isn't AMI EC Firmware.[EIP31739]
+==============================================================================
+2.28
+	1. Fix the issue that AFU stops flashing when it cannot find ROM ID in system ROM.
+==============================================================================
+2.27
+	1.ROMID and Password check by AFU before flashing BIOS.[EIP14374][EIP19375] 
+	2.AFU keep BIOS last setting after flashing BIOS.[EIP19257] 
+	3.Do NVRAM flashing after main BIOS being programmed.[EIP19890]
+	4.AFU support "$ECB" table in E000.[EIP19891] 
+	5.AFU support Intel ME flash.[EIP20087] 
+	6.AFU Support Standalong EC firmware Flash.[EIP12739]
+	7.AFU support add rom file name by AMIUCP @CMD. 
+==============================================================================
+2.26
+	1.Bug Fix:Afu cann¡¯t transfer enough buffer to BLOCK DESCRIPTION. [EIP 18348] 
+	2.Add a new command [/hole:](update specific rom hole according to romhole GUID).[EIP 18041]
+==============================================================================
+2.25	
+	1.EIP 13230:To support combined utility on afudos and afuwin,and add amiucp support.
+	2.EIP 13960:Update the driver amifldrv64.sys.
+	3.support /s as a stand along command.
+	4.Modify help message of /R command. [EIP15239]. 
+	5./u command will not display ROMID of specified file unless it is compatible with SUT.[EIP15202]. 
+	6.Adding warning message when /O command overwrites existing files.[EIP15196]. 
+	7.when BIOS has two fv_bb or fv_main, Aptio AFU tool can not update ROM hole by "/K0" option.[ EIP15980]. 
+	8.Make sure AFU of Aptio version clears upper 24 bits of EAX before issuing swSMI to flash.[ EIP16388].
+	9.Add UAC support.[EIP15602]. 
+	10.Request AFUWIN to prevent power button shutdown.
+==============================================================================
+2.23
+	1.Lock the keyboard when programming under Windows.
+	2.Add new options /Q,/D,/Shutdown,/MAKEDRV,/Retry,/Rn for AFUAPTIO.
